@@ -1,0 +1,430 @@
+{
+  "version": "0.0.1",
+  "id": 1,
+  "updated_at": "2026-01-14T11:58:09.681480",
+  "user_id": "guestuser@gmail.com",
+  "created_at": "2026-01-14T11:58:09.678446",
+  "config": {
+    "id": "gallery_default",
+    "name": "Default Component Gallery",
+    "url": null,
+    "metadata": {
+      "author": "AutoGen Team",
+      "version": "1.0.0",
+      "description": "A default gallery containing basic components for human-in-loop conversations",
+      "tags": [
+        "human-in-loop",
+        "assistant",
+        "web agents"
+      ],
+      "license": "MIT",
+      "homepage": null,
+      "category": "conversation",
+      "last_synced": null
+    },
+    "components": {
+      "agents": [
+        {
+          "provider": "autogen_agentchat.agents.UserProxyAgent",
+          "component_type": "agent",
+          "version": 1,
+          "component_version": 1,
+          "description": "An agent that can represent a human user through an input function.",
+          "label": "CEO (user)",
+          "config": {
+            "name": "user_proxy",
+            "description": "a human user that should be consulted only when the assistant_agent is unable to verify the information provided by the websurfer_agent"
+          }
+        },
+        {
+          "provider": "autogen_agentchat.agents.AssistantAgent",
+          "component_type": "agent",
+          "version": 1,
+          "component_version": 1,
+          "description": "an agent that evaluates each proposed strategy strictly from a financial and cost-efficiency perspective.",
+          "label": "CFO",
+          "config": {
+            "name": "finance_agent",
+            "model_client": {
+              "provider": "autogen_ext.models.openai.OpenAIChatCompletionClient",
+              "component_type": "model",
+              "version": 1,
+              "component_version": 1,
+              "description": "OpenAI GPT 4.1",
+              "label": "OpenAI GPT 4.1",
+              "config": {
+                "model": "gpt-4.1",
+                "api_key": "MY_API_KEY"
+              }
+            },
+            "tools": [],
+            "handoffs": [],
+            "model_context": {
+              "provider": "autogen_core.model_context.UnboundedChatCompletionContext",
+              "component_type": "chat_completion_context",
+              "version": 1,
+              "component_version": 1,
+              "description": "An unbounded chat completion context that keeps a view of the all the messages.",
+              "label": "UnboundedChatCompletionContext",
+              "config": {}
+            },
+            "description": "an agent that verifies and summarizes information",
+            "system_message": "You are the Finance Agent. Your task is to evaluate each proposed strategy strictly from a financial and cost-efficiency perspective. Consider short-term profitability, return on investment, operational costs, and the impact on shareholder value. Your goal is to identify which option would deliver the highest financial benefit while minimising risks. Present your analysis clearly and concisely, using comparative reasoning where appropriate. Speak only from your own perspective. Do not summarise or interpret the arguments of other agents. Your responses are limited to 100 words per response.",
+            "model_client_stream": false,
+            "reflect_on_tool_use": false,
+            "tool_call_summary_format": "{result}"
+          }
+        },
+        {
+          "provider": "autogen_agentchat.agents.AssistantAgent",
+          "component_type": "agent",
+          "version": 1,
+          "component_version": 1,
+          "description": "an agent that assesses each proposed strategy based on technological innovation, feasibility, and long-term competitiveness.",
+          "label": "CTO",
+          "config": {
+            "name": "technology_agent",
+            "model_client": {
+              "provider": "autogen_ext.models.openai.OpenAIChatCompletionClient",
+              "component_type": "model",
+              "version": 1,
+              "component_version": 1,
+              "description": "OpenAI GPT 4.1",
+              "label": "OpenAI GPT 4.1",
+              "config": {
+                "model": "gpt-4.1",
+                "api_key": "MY_API_KEY"
+              }
+            },
+            "tools": [],
+            "handoffs": [],
+            "model_context": {
+              "provider": "autogen_core.model_context.UnboundedChatCompletionContext",
+              "component_type": "chat_completion_context",
+              "version": 1,
+              "component_version": 1,
+              "description": "An unbounded chat completion context that keeps a view of the all the messages.",
+              "label": "UnboundedChatCompletionContext",
+              "config": {}
+            },
+            "description": "an agent that verifies and summarizes information",
+            "system_message": "You are the Technology Agent. Your task is to assess each proposed strategy based on its technological merits, feasibility, and potential to secure future competitiveness. Consider innovation potential, scalability, technical risks, and alignment with emerging trends. Your goal is to identify the option that positions the company as a technology leader. Present your analysis clearly and concisely, using comparative reasoning where appropriate. Speak only from your own perspective. Do not summarise or interpret the arguments of other agents. Your responses are limited to 100 words per response.",
+            "model_client_stream": false,
+            "reflect_on_tool_use": false,
+            "tool_call_summary_format": "{result}"
+          }
+        },
+        {
+          "provider": "autogen_agentchat.agents.AssistantAgent",
+          "component_type": "agent",
+          "version": 1,
+          "component_version": 1,
+          "description": "an agent that assesses each proposed strategy based on environmental sustainability, social responsibility, and governance principles.",
+          "label": "Sustainability",
+          "config": {
+            "name": "sustainability_agent",
+            "model_client": {
+              "provider": "autogen_ext.models.openai.OpenAIChatCompletionClient",
+              "component_type": "model",
+              "version": 1,
+              "component_version": 1,
+              "description": "OpenAI GPT 4.1",
+              "label": "OpenAI GPT 4.1",
+              "config": {
+                "model": "gpt-4.1",
+                "api_key": "MY_API_KEY"
+              }
+            },
+            "tools": [],
+            "handoffs": [],
+            "model_context": {
+              "provider": "autogen_core.model_context.UnboundedChatCompletionContext",
+              "component_type": "chat_completion_context",
+              "version": 1,
+              "component_version": 1,
+              "description": "An unbounded chat completion context that keeps a view of the all the messages.",
+              "label": "UnboundedChatCompletionContext",
+              "config": {}
+            },
+            "description": "an agent that verifies and summarizes information",
+            "system_message": "You are the Sustainability Agent. Your task is to assess each proposed strategy based on its contribution to environmental sustainability, social responsibility, and good governance (ESG). Consider carbon footprint, community impact, ethical standards, and alignment with global sustainability goals. Your goal is to ensure that long-term societal and environmental impacts are properly considered. Present your analysis clearly and concisely, using comparative reasoning where appropriate. Speak only from your own perspective. Do not summarise or interpret the arguments of other agents. Your responses are limited to 100 words per response.",
+            "model_client_stream": false,
+            "reflect_on_tool_use": false,
+            "tool_call_summary_format": "{result}"
+          }
+        }
+      ],
+      "models": [
+        {
+          "provider": "autogen_ext.models.openai.OpenAIChatCompletionClient",
+          "component_type": "model",
+          "version": 1,
+          "component_version": 1,
+          "description": "OpenAI GPT-4.1",
+          "label": "OpenAI GPT 4.1",
+          "config": {
+            "model": "gpt-4.1",
+            "api_key": "MY_API_KEY"
+          }
+        }
+      ],
+      "tools": [
+        {
+          "provider": "autogen_core.tools.FunctionTool",
+          "component_type": "tool",
+          "version": 1,
+          "component_version": 1,
+          "description": "A dummy tool",
+          "label": "Dummy Tool",
+          "config": {
+            "source_code": "",
+            "name": "dummy",
+            "description": "dummy",
+            "global_imports": [],
+            "has_cancellation_support": false
+          }
+        }
+      ],
+      "terminations": [
+        {
+          "provider": "autogen_agentchat.conditions.TextMentionTermination",
+          "component_type": "termination",
+          "version": 1,
+          "component_version": 1,
+          "description": "Terminate the conversation if a specific text is mentioned.",
+          "label": "TextMentionTermination",
+          "config": {
+            "text": "TERMINATE"
+          }
+        },
+        {
+          "provider": "autogen_agentchat.conditions.MaxMessageTermination",
+          "component_type": "termination",
+          "version": 1,
+          "component_version": 1,
+          "description": "Terminate the conversation after a maximum number of messages have been exchanged.",
+          "label": "MaxMessageTermination",
+          "config": {
+            "max_messages": 10,
+            "include_agent_event": false
+          }
+        },
+        {
+          "provider": "autogen_agentchat.base.OrTerminationCondition",
+          "component_type": "termination",
+          "version": 1,
+          "component_version": 1,
+          "description": "Termination condition that ends the conversation when either a message contains 'TERMINATE' or the maximum number of messages is reached.",
+          "label": "OR Termination",
+          "config": {
+            "conditions": [
+              {
+                "provider": "autogen_agentchat.conditions.TextMentionTermination",
+                "component_type": "termination",
+                "version": 1,
+                "component_version": 1,
+                "description": "Terminate the conversation if a specific text is mentioned.",
+                "label": "TextMentionTermination",
+                "config": {
+                  "text": "TERMINATE"
+                }
+              },
+              {
+                "provider": "autogen_agentchat.conditions.MaxMessageTermination",
+                "component_type": "termination",
+                "version": 1,
+                "component_version": 1,
+                "description": "Terminate the conversation after a maximum number of messages have been exchanged.",
+                "label": "MaxMessageTermination",
+                "config": {
+                  "max_messages": 10,
+                  "include_agent_event": false
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "teams": [
+        {
+          "provider": "autogen_agentchat.teams.SelectorGroupChat",
+          "component_type": "team",
+          "version": 1,
+          "component_version": 1,
+          "description": "A team with 4 agents to consider various perspectives.",
+          "label": "Team 01",
+          "config": {
+            "participants": [
+              {
+                "provider": "autogen_agentchat.agents.AssistantAgent",
+                "component_type": "agent",
+                "version": 1,
+                "component_version": 1,
+                "description": "an agent that evaluates each proposed strategy strictly from a financial and cost-efficiency perspective.",
+                "label": "CFO",
+                "config": {
+                  "name": "finance_agent",
+                  "model_client": {
+                    "provider": "autogen_ext.models.openai.OpenAIChatCompletionClient",
+                    "component_type": "model",
+                    "version": 1,
+                    "component_version": 1,
+                    "description": "OpenAI GPT-4.1",
+                    "label": "OpenAI GPT-4.1",
+                    "config": {
+                      "model": "gpt-4.1",
+                      "api_key": "MY_API_KEY"
+                    }
+                  },
+                  "tools": [],
+                  "handoffs": [],
+                  "model_context": {
+                    "provider": "autogen_core.model_context.UnboundedChatCompletionContext",
+                    "component_type": "chat_completion_context",
+                    "version": 1,
+                    "component_version": 1,
+                    "description": "An unbounded chat completion context that keeps a view of the all the messages.",
+                    "label": "UnboundedChatCompletionContext",
+                    "config": {}
+                  },
+                  "description": "an agent that verifies and summarizes information",
+                  "system_message": "You are the Finance Agent. Your task is to evaluate each proposed strategy strictly from a financial and cost-efficiency perspective. Consider short-term profitability, return on investment, operational costs, and the impact on shareholder value. Your goal is to identify which option would deliver the highest financial benefit while minimising risks. Present your analysis clearly and concisely, using comparative reasoning where appropriate. Speak only from your own perspective. Do not summarise or interpret the arguments of other agents. Your responses are limited to 100 words per response.",
+                  "model_client_stream": false,
+                  "reflect_on_tool_use": false,
+                  "tool_call_summary_format": "{result}"
+                }
+              },
+              {
+                "provider": "autogen_agentchat.agents.AssistantAgent",
+                "component_type": "agent",
+                "version": 1,
+                "component_version": 1,
+                "description": "an agent that assesses each proposed strategy based on technological innovation, feasibility, and long-term competitiveness.",
+                "label": "CTO",
+                "config": {
+                  "name": "technology_agent",
+                  "model_client": {
+                    "provider": "autogen_ext.models.openai.OpenAIChatCompletionClient",
+                    "component_type": "model",
+                    "version": 1,
+                    "component_version": 1,
+                    "description": "OpenAI GPT-4.1",
+                    "label": "OpenAI GPT-4.1",
+                    "config": {
+                      "model": "gpt-4.1",
+                      "api_key": "MY_API_KEY"
+                    }
+                  },
+                  "tools": [],
+                  "handoffs": [],
+                  "model_context": {
+                    "provider": "autogen_core.model_context.UnboundedChatCompletionContext",
+                    "component_type": "chat_completion_context",
+                    "version": 1,
+                    "component_version": 1,
+                    "description": "An unbounded chat completion context that keeps a view of the all the messages.",
+                    "label": "UnboundedChatCompletionContext",
+                    "config": {}
+                  },
+                  "description": "an agent that verifies and summarizes information",
+                  "system_message": "You are the Technology Agent. Your task is to assess each proposed strategy based on its technological merits, feasibility, and potential to secure future competitiveness. Consider innovation potential, scalability, technical risks, and alignment with emerging trends. Your goal is to identify the option that positions the company as a technology leader. Present your analysis clearly and concisely, using comparative reasoning where appropriate. Speak only from your own perspective. Do not summarise or interpret the arguments of other agents. Your responses are limited to 100 words per response.",
+                  "model_client_stream": false,
+                  "reflect_on_tool_use": false,
+                  "tool_call_summary_format": "{result}"
+                }
+              },
+              {
+                "provider": "autogen_agentchat.agents.AssistantAgent",
+                "component_type": "agent",
+                "version": 1,
+                "component_version": 1,
+                "description": "an agent that assesses each proposed strategy based on environmental sustainability, social responsibility, and governance principles.",
+                "label": "Sustainability",
+                "config": {
+                  "name": "sustainability_agent",
+                  "model_client": {
+                    "provider": "autogen_ext.models.openai.OpenAIChatCompletionClient",
+                    "component_type": "model",
+                    "version": 1,
+                    "component_version": 1,
+                    "description": "OpenAI GPT-4.1",
+                    "label": "OpenAI GPT-4.1",
+                    "config": {
+                      "model": "gpt-4.1",
+                      "api_key": "MY_API_KEY"
+                    }
+                  },
+                  "tools": [],
+                  "handoffs": [],
+                  "model_context": {
+                    "provider": "autogen_core.model_context.UnboundedChatCompletionContext",
+                    "component_type": "chat_completion_context",
+                    "version": 1,
+                    "component_version": 1,
+                    "description": "An unbounded chat completion context that keeps a view of the all the messages.",
+                    "label": "UnboundedChatCompletionContext",
+                    "config": {}
+                  },
+                  "description": "an agent that verifies and summarizes information",
+                  "system_message": "You are the Sustainability Agent. Your task is to assess each proposed strategy based on its contribution to environmental sustainability, social responsibility, and good governance (ESG). Consider carbon footprint, community impact, ethical standards, and alignment with global sustainability goals. Your goal is to ensure that long-term societal and environmental impacts are properly considered. Present your analysis clearly and concisely, using comparative reasoning where appropriate. Speak only from your own perspective. Do not summarise or interpret the arguments of other agents. Your responses are limited to 100 words per response.",
+                  "model_client_stream": false,
+                  "reflect_on_tool_use": false,
+                  "tool_call_summary_format": "{result}"
+                }
+              },
+              {
+                "provider": "autogen_agentchat.agents.UserProxyAgent",
+                "component_type": "agent",
+                "version": 1,
+                "component_version": 1,
+                "description": "An agent that can represent a human user through an input function.",
+                "label": "CEO (user)",
+                "config": {
+                  "name": "user_proxy",
+                  "description": "a human user that should be consulted only when the assistant_agent is unable to verify the information provided by the websurfer_agent"
+                }
+              }
+            ],
+            "model_client": {
+              "provider": "autogen_ext.models.openai.OpenAIChatCompletionClient",
+              "component_type": "model",
+              "version": 1,
+              "component_version": 1,
+              "description": "OpenAI GPT-4.1",
+              "label": "OpenAI GPT-4.1",
+              "config": {
+                "model": "gpt-4.1",
+                "api_key": "MY_API_KEY"
+              }
+            },
+            "termination_condition": {
+              "provider": "autogen_agentchat.base.OrTerminationCondition",
+              "component_type": "termination",
+              "version": 1,
+              "component_version": 1,
+              "label": "OrTerminationCondition",
+              "config": {
+                "conditions": [
+                  {
+                    "provider": "autogen_agentchat.conditions.TextMentionTermination",
+                    "component_type": "termination",
+                    "version": 1,
+                    "component_version": 1,
+                    "description": "Terminate the conversation if a specific text is mentioned.",
+                    "label": "TextMentionTermination",
+                    "config": {
+                      "text": "TERMINATE"
+                    }
+                  }
+                ]
+              }
+            },
+            "selector_prompt": "You are the coordinator of a multi-agent deliberation scenario. The following roles are available:\n{roles}\n\nThe agents collaborate to support a human decision-maker (user_proxy), who must select one strategy from several proposed options. The specialist agents (finance_agent, technology_agent, sustainability_agent) discuss the options from their own perspectives. The user_proxy will make the final decision.\n\nAgent roles and tasks:\n- finance_agent: brings financial viability, profitability, and cost-efficiency perspectives into the discussion.\n- technology_agent: brings technological innovation, scalability, and competitiveness perspectives into the discussion.\n- sustainability_agent: brings environmental, social, and governance (ESG) perspectives into the discussion.\n- user_proxy: represents the CEO, provides input, asks questions, eliminates options, and makes the final decision.\n\nGeneral coordination principles:\n- Begin by selecting the specialist agents one at a time to present their perspectives. Start a new round with finance_agent, followed by technology_agent, and then sustainability_agent.\n- After all three have spoken once, select the user_proxy to either ask a question or eliminate one of the options.\n- If the user_proxy eliminates an option and more than one option remains, start a new round of discussion among the remaining options using the same pattern.\n- Repeat this cycle until only one option remains and the user_proxy confirms the final decision.\n\nTurn-taking and role separation:\n- Select exactly one specialist agent at a time to contribute. Each should speak at least once per round.\n- Specialist agents must speak only from their own perspective and must not summarise or paraphrase the views of other agents.\n- No agent may speak on behalf of others.\n- The user_proxy must only speak when selected, and may ask questions, request clarification, or eliminate one option.\n- Keep the conversation focused, clean, and aligned with the structured decision-making process.\n\nRead the following conversation. Then select the next role from {participants} to play. Only return the role.\n\n{history}\n\nRead the above conversation. Then select the next role from {participants} to play. Only return the role.",
+            "allow_repeated_speaker": false,
+            "max_selector_attempts": 3
+          }
+        }
+      ]
+    }
+  }
+}
